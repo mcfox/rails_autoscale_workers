@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
@@ -12,8 +11,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.12'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'easy_captcha', git: 'git@github.com:brunoporto/easy_captcha.git'
-gem 'devise-security', git: 'git@github.com:brunoporto/devise-security.git'
+gem 'devise'
 gem 'sidekiq', '~> 5.2'
 gem 'haml', '~> 5.0'
 gem 'simple_form', '~> 4.0'
@@ -25,6 +23,8 @@ gem 'aws-sdk', '~> 2.0'
 gem 'aws-sdk-rails', '~> 1.0'
 gem 'rest-client', '~> 2.0'
 gem 'enumerize', '~> 2.2'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -43,7 +43,6 @@ group :development do
   gem 'capistrano-bundler', '~> 1.2'
   gem 'capistrano3-puma', '~> 3.1'
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

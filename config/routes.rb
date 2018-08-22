@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   root 'dashboard#index'
 
-  resources :users
+  devise_for :users
+  # resources :users
 
   resources :applications do
     resources :work_managers, except: [:index] do
@@ -19,5 +20,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
 
 end
