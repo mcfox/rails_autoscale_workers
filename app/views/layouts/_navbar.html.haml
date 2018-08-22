@@ -1,0 +1,37 @@
+#navbar-mobile.collapse.navbar-collapse
+  %ul.nav.navbar-nav.mr-auto.float-left
+    %li.nav-item.d-none.d-md-block
+      %a.nav-link.nav-menu-main.menu-toggle.hidden-xs{:href => "javascript:void(0)"}
+        %i.ft-menu
+    %li.nav-item.d-none.d-md-block
+      %a.nav-link.nav-link-expand{:href => "javascript:void(0)"}
+        %i.ficon.ft-maximize
+  %ul.nav.navbar-nav.float-right
+    - if user_signed_in?
+      %li.dropdown.dropdown-user.nav-item
+        %a.dropdown-toggle.nav-link.dropdown-user-link{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
+          %span.avatar
+            = image_tag 'avatar-s-19.png'
+            %i
+        .dropdown-menu.dropdown-menu-right
+          -#%a.dropdown-item{:href => "javascript:void(0)"}
+          -#  %i.ft-user
+          -#  Edit Profile
+          -#%a.dropdown-item{:href => "javascript:void(0)"}
+          -#  %i.ft-mail
+          -#  My Inbox
+          -#%a.dropdown-item{:href => "javascript:void(0)"}
+          -#  %i.ft-check-square
+          -#  Task
+          -#%a.dropdown-item{:href => "javascript:void(0)"}
+          -#  %i.ft-message-square
+          -#  Chats
+          -#.dropdown-divider
+          = link_to destroy_user_session_path, method: :delete, data: {confirm: t(:are_you_sure)}, class: 'dropdown-item' do
+            %i.fa.fa-sign-out
+            = t(:logout)
+    - else
+      %li.nav-item
+        = link_to new_user_session_path, class: 'nav-link' do
+          %i.fa.fa-sign-in
+          %span= t(:login)

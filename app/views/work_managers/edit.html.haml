@@ -1,0 +1,19 @@
+.content-wrapper
+  .content-header.row
+    .content-header-left.col-md-6.col-12.mb-2
+      %h3.content-header-title.mb-0
+        = t(:edit)
+        = WorkManager.model_name.human
+    .content-header-right.text-md-right.col-md-6.col-12
+      .btn-group
+        = link_to application_path(@application), class: 'btn btn-sm btn-secondary' do
+          = Application.model_name.human
+          = @application.name
+  .content-body
+    %section
+      .row
+        .col-md-12
+          .card
+            .card-content.collpase.show
+              .card-body
+                = render 'form'

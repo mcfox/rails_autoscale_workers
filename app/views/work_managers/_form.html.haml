@@ -1,0 +1,13 @@
+= simple_form_for [@application, @work_manager], html: {class: 'form form-horizontal form-bordered'}, wrapper: :horizontal_form do |f|
+  .form-body
+    = f.input :name
+    = f.input :aws_region
+    = f.input :autoscalinggroup_name
+    = f.input :queue_name
+    = f.input :max_workers
+    = f.input :min_workers
+    = f.input :minutes_to_process
+    = f.input :jobs_per_cycle
+    = f.input :active, include_blank: false
+  .form-actions
+    = f.submit class: 'btn btn-primary'

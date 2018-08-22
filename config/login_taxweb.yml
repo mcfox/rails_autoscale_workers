@@ -1,0 +1,27 @@
+google:
+  client_id: ''
+  client_secret: ''
+linkedin:
+  key: ''
+  secret: ''
+passaporte_web:
+  production:
+    app_slug: ''
+    app_id: ''
+    app_secret: ''
+    url: ''
+  staging:
+    app_slug: ''
+    app_id: ''
+    app_secret: ''
+    url: ''
+  development:
+    app_slug: ''
+    app_id: ''
+    app_secret: ''
+    url: ''
+  test:
+    app_slug: ''
+    app_id: ''
+    app_secret: ''
+    url: ''

@@ -1,0 +1,76 @@
+pt-BR:
+  activerecord:
+    models:
+      application:
+        one: &application_name Aplicativo
+        other: Aplicativos
+      work_manager:
+        one: &work_manager_name Gerenciador
+        other: Gerenciadores
+      user:
+        one: &user_name Usuário
+        other: Usuários
+      cycle:
+        one: &cycle_name Ciclo
+        other: Cliclos
+    attributes:
+      timestamp: &timestamp
+        created_at: "Criação"
+        updated_at: "Atualização"
+      application:
+        <<: *timestamp
+        name: 'Nome'
+        aws_access_key_id: 'ID da chave de acesso'
+        aws_secret_access_key: 'Segredo da chave de acesso'
+        valid_aws_credentials: 'Credenciais AWS Válidas?'
+        jobs_url: 'URL de consulta de Jobs'
+        valid_jobs_url: 'URL de consulta de Jobs válido?'
+        active: 'Ativo?'
+      work_manager:
+        <<: *timestamp
+        name: 'Nome'
+        aws_region: 'Região da AWS'
+        autoscalinggroup_name: 'Nome do AutoScalingGroup'
+        queue_name: 'Nome da Fila de Jobs'
+        max_workers: 'Máximo de Workers'
+        min_workers: 'Mínimo de Workers'
+        minutes_to_process: 'Minutos para processamento'
+        jobs_per_cycle: 'Jobs por ciclo'
+        minutes_between_cycles: 'Minutos entre os ciclos'
+        active: 'Ativos?'
+        last_check: 'Última Checagem'
+        last_error: 'Erro da Última Checagem'
+        application: *application_name
+      cycle:
+        <<: *timestamp
+        queue_jobs: 'Total'
+        new_jobs: 'Novos'
+        processed_jobs: 'Processados'
+        workers: 'Workers Ativos'
+        desired_workers: 'Workers Necessários'
+        work_manager: *work_manager_name
+      user:
+        <<: *timestamp
+        name: "Nome"
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de Senha"
+        confirmation_sent_at: "Confirmação enviada em"
+        confirmation_token: "Token de confirmação"
+        confirmed_at: "Confirmado em"
+        created_at: "Criado em"
+        current_password: "Senha atual"
+        current_sign_in_at: "Atualmente logado em"
+        current_sign_in_ip: "IP do acesso atual"
+        encrypted_password: "Senha criptografada"
+        failed_attempts: "Tentativas sem sucesso"
+        last_sign_in_at: "Último acesso em"
+        last_sign_in_ip: "Último IP de acesso"
+        locked_at: "Bloqueado em"
+        remember_created_at: "Lembrar criado em"
+        remember_me: "Lembre-se de mim"
+        reset_password_sent_at: "Resetar senha enviado em"
+        reset_password_token: "Resetar token de senha"
+        sign_in_count: "Contagem de acessos"
+        unconfirmed_email: "E-mail não confirmado"
+        unlock_token: "Token de desbloqueio"

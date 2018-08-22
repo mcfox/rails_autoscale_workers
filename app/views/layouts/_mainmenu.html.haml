@@ -1,0 +1,12 @@
+.main-menu.menu-fixed.menu-light.menu-accordion.menu-shadow.menu-border{"data-scroll-to-active" => "true"}
+  .main-menu-content
+    %ul#main-menu-navigation.navigation.navigation-main{"data-menu" => "menu-navigation"}
+      %li.nav-item
+        = link_to root_path do
+          %i.la.la-home
+          %span.menu-title= t(:dashboard)
+      - if user_signed_in?
+        %li.nav-item
+          = link_to applications_path do
+            %i.la.la-laptop
+            %span.menu-title= Application.model_name.human(count: 2)

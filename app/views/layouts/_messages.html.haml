@@ -1,0 +1,4 @@
+- flash.each do |msg_type, message|
+  .flash-message.alert.m-1{class: bootstrap_class_for(msg_type), role: 'alert'}
+    %button.close{'data-dismiss': 'alert', 'aria-hidden': 'true'} &times;
+    = message

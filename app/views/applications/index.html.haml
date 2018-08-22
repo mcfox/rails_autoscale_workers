@@ -1,0 +1,14 @@
+.content-wrapper
+  .content-header.row
+    .content-header-left.col-md-6.col-12.mb-2
+      %h3.content-header-title.mb-0= Application.model_name.human(count: 2)
+    .content-header-right.text-md-right.col-md-6.col-12
+      .btn-group
+        = link_to new_application_path, class: 'btn btn-sm btn-primary' do
+          %i.fa.fa-plus
+          = t(:new)
+  .content-body
+    %section.card-headings
+      .row
+        - @applications.each do |application|
+          .col-sm-6.col-lg-4= render 'item', application: application

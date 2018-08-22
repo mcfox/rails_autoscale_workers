@@ -1,0 +1,19 @@
+/*
+ *
+ * -- VENDORS
+ *= require bootstrap
+ *= require feathericon/feathericon
+ *= require flag-icon/flag-icon
+ *= require fontawesome/font-awesome
+ *= require pace
+ *
+ * -- THEME
+ *= require bootstrap-extended
+ *= require form-validation
+ *= require colors
+ *= require components
+ *= require vertical-overlay-menu
+ *
+ * -- CUSTOM
+ *= require_self
+ */

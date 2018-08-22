@@ -1,0 +1,48 @@
+pt-BR:
+  simple_form:
+    "yes": 'Sim'
+    "no": 'Não'
+    required:
+      text: 'Obrigatório'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      html: '<abbr title="Obrigatório">*</abbr>'
+    error_notification:
+      default_message: "O registro não foi salvo. Verifique os erros abaixo:"
+    labels:
+      application_database:
+        adapter: 'Adaptador'
+        host: 'Endereço'
+        username: 'Usuário'
+        password: 'Senha'
+        database: 'Nome'
+        encoding: 'Codificação'
+        reconnect: 'Reconectar?'
+        pool: 'Pool de Conexão'
+        port: 'Porta'
+      work_manager:
+        name: 'Nome'
+        aws_region: 'Região AWS'
+        autoscalinggroup_name: 'Nome do AutoScalingGroup'
+        queue_name: 'Nome da Fila'
+        max_workers: 'Máximo de Workers'
+        min_workers: 'Mínimo de Workers'
+        minutes_to_process: 'Tempo Esperado de Processamento'
+        jobs_per_cycle: 'Jobs estimados por hora'
+        active: 'Ativo?'
+    hints:
+      application:
+        jobs_url: 'Url que retorna a qtde de jobs nas filas: #{url}/#{queue_name}/#{since_time}'
+      work_manager:
+        aws_region: 'Não use letras no final da região use apenas o nome da região, exemplo: us-east-1, us-west-2'
+        queue_name: 'Para informar multiplas filas separe-as por vírgula: fila1,fila2,fila3,...'
+        max_workers: 'Total de instâncias que esse gerenciador pode alocar no AutoScaling '
+        minutes_to_process: 'Tempo (minutos) desejado para conclusão de um Job.'
+        jobs_per_cycle: 'Número de jobs que uma instância no AutoScaling consegue processar por hora.'
+        active: 'Quando inativo, ele não fará verificações.'
+    helpers:
+      submit:
+        application:
+          create: "Criar %{model}"
+          update: "Salvar Algerações"

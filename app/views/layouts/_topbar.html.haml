@@ -1,0 +1,17 @@
+%nav.header-navbar.navbar-expand-md.navbar.navbar-with-menu.navbar-without-dd-arrow.fixed-top.navbar-dark.bg-blue-grey.navbar-shadow.navbar-brand-center
+  .navbar-wrapper
+    .navbar-header
+      %ul.nav.navbar-nav.flex-row
+        - if user_signed_in?
+          %li.nav-item.mobile-menu.d-md-none.mr-auto
+            %a.nav-link.nav-menu-main.menu-toggle.hidden-xs{:href => "javascript:void(0)"}
+              %i.ft-menu.font-large-1
+        %li.nav-item
+          = link_to root_path, class: 'navbar-brand' do
+            = image_tag 'asw.png', class: 'brand-logo'
+            %h3.brand-text ASWorkers
+        %li.nav-item.d-md-none
+          %a.nav-link.open-navbar-container{"data-target" => "#navbar-mobile", "data-toggle" => "collapse"}
+            %i.la.la-ellipsis-v
+    .navbar-container.content
+      = render 'layouts/navbar'

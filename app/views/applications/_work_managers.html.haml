@@ -1,0 +1,26 @@
+.card
+  .card-header
+    .pull-right
+      = link_to new_application_work_manager_path(@application), class: 'btn btn-sm btn-outline-primary', title: 'Novo' do
+        %i.fa.fa-plus
+        = t(:new)
+    %h5.card-title= WorkManager.model_name.human(count: 2)
+  .card-content
+    - if @application.work_managers.count > 0
+      .table-responsive
+        %table.table.table-striped.mb-0
+          %tbody
+            - @application.work_managers.each do |work_manager|
+              %tr
+                %td.pl-1= link_to work_manager.name, [@application, work_manager]
+                %td.pr-0{width: '10'}
+                  .btn-group
+                    = link_to edit_application_work_manager_path(@application, work_manager), class: 'btn btn-sm btn-outline-secondary' do
+                      %i.fa.fa-edit
+                      = t(:edit)
+                    = link_to application_work_manager_path(@application, work_manager), method: :delete, data: {confirm: t(:are_you_sure)}, title: 'Excluir', class: 'btn btn-sm btn-outline-danger' do
+                      %i.fa.fa-trash
+                      = t(:destroy)
+    - else
+      .card-body.pt-0
+        .alert.alert-info= t(:no_records_found)

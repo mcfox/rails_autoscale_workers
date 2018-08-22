@@ -1,0 +1,8 @@
+= simple_form_for @application, html: {class: 'form form-horizontal form-bordered'}, wrapper: :horizontal_form do |f|
+  .form-body
+    = f.input :name
+    = f.input :aws_access_key_id
+    = f.input :aws_secret_access_key
+    = f.input :jobs_url
+  .form-actions
+    = f.submit class: 'btn btn-primary'

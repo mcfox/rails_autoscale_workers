@@ -1,0 +1,6 @@
+pt-BR:
+  enumerize:
+    work_manager:
+      active:
+        'true': 'Ativo'
+        'false': 'Inativo'

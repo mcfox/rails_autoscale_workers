@@ -1,0 +1,18 @@
+.content-wrapper
+  .content-header.row
+    .content-header-left.col-md-6.col-12.mb-2
+      %h3.content-header-title.mb-0
+        = Application.model_name.human
+        = @application.name
+    .content-header-right.text-md-right.col-md-6.col-12
+      .btn-group
+        = link_to applications_path, class: 'btn btn-sm btn-secondary' do
+          %i.fa.arrow-left
+          = Application.model_name.human(count: 2)
+  .content-body
+    %section.row
+      .col-md-6.col-lg-4
+        = render 'item', application: @application
+        = render 'work_managers'
+      .col-md-6.col-lg-8
+        = render 'work_managers/last_cycles', application: @application, cycles: @application.cycles

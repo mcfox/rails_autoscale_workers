@@ -1,0 +1,19 @@
+.card
+  .card-header
+    %h4.card-title= link_to application.name, application
+    .heading-elements
+      .btn-group{"aria-label" => "Basic example", :role => "group"}
+        = link_to edit_application_path(application), class: 'btn btn-sm btn-outline-secondary', title: 'Editar' do
+          %i.fa.fa-edit
+          = t(:edit)
+        = link_to application_path(application), method: :delete, data: {confirm: t(:are_you_sure)}, class: 'btn btn-sm btn-outline-danger', title: 'Excluir' do
+          %i.fa.fa-trash
+          = t(:destroy)
+  .card-content
+    .card-body.pt-0
+      %p.card-text
+        %i.fa{class: application.valid_aws_credentials? ? icon_classes_ok : icon_classes_error}
+        = Application.human_attribute_name(:valid_aws_credentials)
+      %p.card-text
+        %i.fa{class: application.valid_jobs_url? ? icon_classes_ok : icon_classes_error}
+        = Application.human_attribute_name(:valid_jobs_url)

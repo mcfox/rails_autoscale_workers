@@ -1,0 +1,29 @@
+.card.crypto-card-3.pull-up
+  .card-content
+    .card-body.pb-0
+      .row
+        .col-6.pl-2
+          %h4= link_to application.name, application
+          %h6.text-muted= link_to work_manager.queue_name, [application, work_manager]
+        .col-6.text-right
+          %h5
+            %span.small= t(:jobs)
+            %span.darken-4
+              - if application.valid_jobs_url
+                = work_manager.jobs_count
+              - else
+                %i.fa{class: icon_classes_error}
+          %h5
+            %span.small= t(:workers)
+            %span.darken-4
+              - if application.valid_aws_credentials
+                = work_manager.workers_count
+              - else
+                %i.fa{class: icon_classes_error}
+      .pb-2
+        -#.row
+        -#  .col-12
+        -#    - if application.valid_jobs_url? && application.valid_jobs_url?
+        -#      %canvas#btc-chartjs.height-75
+        -#    - else
+        -#      .mt-2

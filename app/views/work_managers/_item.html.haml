@@ -1,0 +1,57 @@
+.card
+  .card-header
+    %h4.card-title= @work_manager.name
+    .heading-elements
+      .btn-group{"aria-label" => "Basic example", :role => "group"}
+        = link_to edit_application_work_manager_path(@application, @work_manager), class: 'btn btn-sm btn-outline-secondary', title: 'Editar' do
+          %i.fa.fa-edit
+          = t(:edit)
+        = link_to application_work_manager_path(@application, @work_manager), method: :delete, data: {confirm: t(:are_you_sure)}, class: 'btn btn-sm btn-outline-danger', title: 'Excluir' do
+          %i.fa.fa-trash
+          = t(:destroy)
+  .card-content
+    .card-body.pt-0
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:name)
+        %br
+        = @work_manager.name
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:autoscalinggroup_name)
+        %br
+        = @work_manager.autoscalinggroup_name
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:aws_region)
+        %br
+        = @work_manager.aws_region
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:queue_name)
+        %br
+        = @work_manager.queue_name
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:max_workers)
+        %br
+        = @work_manager.max_workers
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:min_workers)
+        %br
+        = @work_manager.min_workers
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:minutes_to_process)
+        %br
+        = @work_manager.minutes_to_process
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:jobs_per_cycle)
+        %br
+        = @work_manager.jobs_per_cycle
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:last_check)
+        %br
+        = l(@work_manager.last_check, format: :short) if @work_manager.last_check.present?
+      - if @work_manager.last_error.present?
+        %p.card-text
+          %strong= WorkManager.human_attribute_name(:last_error)
+          .text-danger= @work_manager.last_error
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:active)
+        %br
+        = @work_manager.active_text

@@ -1,0 +1,14 @@
+.content-wrapper
+  .content-header.row
+  .content-body
+    .row
+      - @work_managers.each do |work_manager|
+        - application = work_manager.application
+        .col-xl-4.col-12
+          = render 'application_card', application: application,  work_manager: work_manager
+    .row
+      .col-xl-4.col-12
+        - if user_signed_in?
+          = link_to new_application_path, class: 'btn btn-primary' do
+            = t(:new)
+            = Application.model_name.human

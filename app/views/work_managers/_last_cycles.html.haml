@@ -1,0 +1,45 @@
+.card
+  .card-header
+    %h4.card-title= t(:last_cycles)
+    .heading-elements
+      .btn-group
+        = link_to '#', data: {action: 'expand'}, class: 'btn btn-sm btn-outline-secondary' do
+          %i.ft-maximize
+          = t(:expand)
+        - if defined?(application) && defined?(work_manager)
+          = link_to check_application_work_manager_path(application, work_manager), data: {confirm: t(:are_you_sure), disable_with: t(:running)}, class: 'btn btn-sm btn-outline-warning', title: 'Forçar Checagem' do
+            %i.fa.fa-bolt
+            = t(:check)
+          = link_to clear_cycles_application_work_manager_path(application, work_manager), method: :delete, data: {confirm: t(:are_you_sure), disable_with: t(:running)}, class: 'btn btn-sm btn-outline-danger', title: 'Excluir Todos os Ciclos' do
+            %i.fa.fa-trash
+            = t(:clear)
+
+  .card-content.collapse.show
+    - if defined?(cycles) && cycles.recent.count > 0
+      .table-responsive
+        %table.table.table-hover.table-striped.mb-0
+          %thead
+            %tr
+              - if defined?(application) && !defined?(worker_manager)
+                %th= Cycle.human_attribute_name(:work_manager)
+              %th= Cycle.human_attribute_name(:queue_jobs)
+              %th= Cycle.human_attribute_name(:new_jobs)
+              %th= Cycle.human_attribute_name(:processed_jobs)
+              %th= Cycle.human_attribute_name(:workers)
+              %th= Cycle.human_attribute_name(:updated_at)
+          %tbody
+            - cycles.last_cycles.each do |cycle|
+              %tr
+                - if defined?(application) && !defined?(worker_manager)
+                  %td= link_to cycle.work_manager.name, [application, cycle.work_manager]
+                %td= cycle.queue_jobs
+                %td= cycle.new_jobs
+                %td= cycle.processed_jobs
+                %td
+                  #{cycle.current_workers} => #{cycle.workers} (#{cycle.desired_workers})
+                %td
+                  = time_ago_in_words cycle.updated_at
+                  atrás
+    - else
+      .card-body.pt-0
+        .alert.alert-info= t(:no_records_found)

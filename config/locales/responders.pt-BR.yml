@@ -1,0 +1,12 @@
+pt-BR:
+  flash:
+    actions:
+      create:
+        success: 'Registro %{resource_name} foi criado com sucesso.'
+        alert: 'Registro %{resource_name} não pôde ser criado.'
+      update:
+        success: 'Registro %{resource_name} foi atualizado com sucesso.'
+        alert: 'Registro %{resource_name} não pôde ser atualizado.'
+      destroy:
+        success: 'Registro %{resource_name} foi excluído com sucesso.'
+        alert: 'Registro %{resource_name} não pôde ser excluído.'
