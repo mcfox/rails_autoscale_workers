@@ -24,7 +24,6 @@
 //= require app-menu
 //= require app
 //= require events
-//= require dashboard
 
 // -- CUSTOM
 //= require_self

@@ -1,0 +1,17 @@
+.devise {
+    padding: 50px;
+    border: 1px;
+}
+
+.devise input {
+    width: 300px;
+    margin: 5px 2px 10px 2px;
+}
+
+.devise input[type="checkbox"] {
+    width: 20px;
+}
+
+.devise input[type="submit"] {
+    width: 100px;
+}

@@ -15,5 +15,10 @@
  *= require vertical-overlay-menu
  *
  * -- CUSTOM
+ *= require devise
  *= require_self
  */
+
+form .form-actions {
+    border-top: 0;
+}
