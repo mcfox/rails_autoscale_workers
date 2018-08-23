@@ -10,9 +10,8 @@
     - if user_signed_in?
       %li.dropdown.dropdown-user.nav-item
         %a.dropdown-toggle.nav-link.dropdown-user-link{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
-          %span.avatar
-            -#= image_tag 'avatar-s-19.png'
-            %i
+          %span
+            = current_user.email
         .dropdown-menu.dropdown-menu-right
           -#%a.dropdown-item{:href => "javascript:void(0)"}
           -#  %i.ft-user
