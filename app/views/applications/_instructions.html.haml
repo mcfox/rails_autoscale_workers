@@ -1,0 +1,61 @@
+%h4 Instruções
+
+%p
+  Crie em seu aplicativo uma API para responder ao ASWorker.
+  No caso de um aplicativo ROR, veja o exemplo abaixo onde criamos um controller para um app usando o Delayd Jobs.
+%p
+  crie um arquivo
+  %i controllers/delayed_jobs_controller.rb
+
+%pre
+  :plain
+    class DelayedJobsController < ApplicationController
+
+      skip_before_action :authenticate_user!
+
+      def index
+        render inline: 'ok'
+      end
+
+      def info
+        # datetime.iso8601
+        # 2018-08-21T19:21:56-03:00
+        queue_name = params[:queue_name]
+        date_time = DateTime.parse(params[:date_time])
+        total_jobs= worker_queue_jobs(queue_name)
+        new_jobs = worker_new_jobs_since(queue_name, date_time)
+        render json: { total_jobs: total_jobs, new_jobs: new_jobs }
+      rescue => e
+        render json: { error: e.message }
+      end
+
+      private
+
+      def worker_source(queue_name)
+        Delayed::Job.where('last_error IS NULL').where(queue: queue_name)
+      end
+
+      def worker_queue_jobs(queue_name)
+        worker_source(queue_name).count(:id)
+      end
+
+      def worker_new_jobs_since(queue_name, initial_date_time)
+        return 0 unless initial_date_time
+        worker_source(queue_name).where('delayed_jobs.created_at > ?', initial_date_time).count(:id)
+      end
+
+    end
+
+
+%p
+  No arquivo
+  %i config/routes.rb
+  adicione as rotas para esses novos actions desse controller
+
+
+%pre
+  :plain
+    # Verifica existencia do servico
+    get 'delayed_jobs', to: 'delayed_jobs#index'
+    # Retorna contadores de Jobs
+    get 'delayed_jobs/:queue_name/:date_time', to: 'delayed_jobs#info'
