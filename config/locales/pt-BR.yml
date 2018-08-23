@@ -5,7 +5,7 @@ pt-BR:
   invalid_jobs_url: 'O gateway informado para capturar o número de jobs é inválido ou não está acessível'
   no_records_found: 'Nenhum registro'
   last_cycles: 'Últimos ciclos'
-  dashboard: 'Dashboard'
+  dashboard: 'Painel de Controle'
   check: 'Checar'
   clear: 'Limpar'
   jobs: 'Jobs'
