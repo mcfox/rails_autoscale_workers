@@ -26,7 +26,7 @@ class CheckService
     true
   rescue => e
     work_manager.update(last_error: e.message)
-    raise
+    # raise
   end
 
   def self.check_all
