@@ -20,6 +20,11 @@ class ScaleAlgorithim
 
   # calulo o numero de workers desejados, levando em conta
   # um eventual deficit de processamento
+  # total = Numero de jobs atualmente na fila
+  # new = Qtd de jobs adicionados no último ciclo
+  # processed = Qtd de jobs processados no último ciclo
+  # current_workers = numero atual de workers
+  #
   def desired_workers(total, new, processed, current_workers)
 
     worker_speed = calc_worker_speed(processed, current_workers)

@@ -25,6 +25,7 @@ gem 'rest-client', '~> 2.0'
 gem 'enumerize', '~> 2.2'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'jquery-rails'
+gem 'annotate'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

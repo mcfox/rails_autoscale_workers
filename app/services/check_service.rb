@@ -5,6 +5,8 @@ class CheckService
   def initialize(work_manager)
     @work_manager = work_manager.is_a?(WorkManager) ? work_manager : WorkManager.find(work_manager)
     @cycle_service = CycleService.new(@work_manager)
+
+
   end
 
   def check

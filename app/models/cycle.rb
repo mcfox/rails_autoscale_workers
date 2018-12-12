@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: cycles
+#
+#  id              :integer          not null, primary key
+#  work_manager_id :integer
+#  queue_jobs      :integer          default(0)
+#  new_jobs        :integer          default(0)
+#  processed_jobs  :integer          default(0)
+#  workers         :integer          default(0)
+#  desired_workers :integer          default(0)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  current_workers :integer          default(0)
+#
+
 class Cycle < ApplicationRecord
 
   validates :work_manager, presence: true

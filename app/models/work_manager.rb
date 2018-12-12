@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: work_managers
+#
+#  id                     :integer          not null, primary key
+#  name                   :string
+#  aws_region             :string
+#  autoscalinggroup_name  :string
+#  queue_name             :string
+#  max_workers            :integer
+#  min_workers            :integer
+#  minutes_to_process     :integer
+#  jobs_per_cycle         :integer
+#  minutes_between_cycles :integer
+#  active                 :boolean          default("true")
+#  last_check             :datetime
+#  last_error             :string(500)
+#  application_id         :integer
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+
 class WorkManager < ApplicationRecord
   extend Enumerize
 

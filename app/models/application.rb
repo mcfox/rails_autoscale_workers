@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: applications
+#
+#  id                    :integer          not null, primary key
+#  name                  :string
+#  aws_access_key_id     :string
+#  aws_secret_access_key :string
+#  valid_aws_credentials :boolean          default(FALSE)
+#  jobs_url              :string
+#  valid_jobs_url        :boolean          default(FALSE)
+#  active                :boolean          default(TRUE)
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+
 class Application < ApplicationRecord
 
   has_many :work_managers, dependent: :destroy
