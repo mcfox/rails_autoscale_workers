@@ -98,7 +98,7 @@ class WorkManager < ApplicationRecord
       end
     end
     wm = final_workers.join('|')
-    puts wm
+    # puts wm
     wm
   end
 

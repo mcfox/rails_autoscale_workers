@@ -61,10 +61,25 @@ class AwsService
   end
 
   def limit_to_min_max_workers(workers)
-    if workers > work_manager.max_workers
-      work_manager.max_workers
-    elsif workers < work_manager.min_workers
-      work_manager.min_workers
+
+    # Limte máximo e mínimo, conforme definido no worker
+    min = work_manager.min_workers || 0
+    max = work_manager.max_workers || 10
+
+    time_now = Time.now.in_time_zone('America/Sao_Paulo')
+    hour = time_now.hour
+    weekday = time_now.wday
+    off_time = weekday.in?([0,7]) && (hour > 22 || hour < 6)
+
+    if off_time
+      min = work_manager.min_workers_off || min
+      max = work_manager.max_workers_off || max
+    end
+
+    if workers > max
+      max
+    elsif workers < min
+      min
     else
       workers
     end

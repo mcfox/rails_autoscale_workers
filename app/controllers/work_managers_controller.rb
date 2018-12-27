@@ -38,7 +38,8 @@ class WorkManagersController < ApplicationController
       CheckService.new(@work_manager).check
       flash[:success] = 'Checagem Efetuada!'
     rescue => e
-      flash[:error] = 'Ocorreu um erro ao tentar efetuar a checagem: %s' % e.message
+      flash[:error] = "Ocorreu um erro ao tentar efetuar a checagem: #{e.message} : #{e.backtrace}"[0..1200]
+      puts e.backtrace
     end
     redirect_to [@application, @work_manager]
   end
@@ -60,7 +61,7 @@ class WorkManagersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def work_manager_params
-    params.require(:work_manager).permit(:id, :name, :aws_region, :autoscalinggroup_name, :queue_name, :max_workers, :min_workers, :minutes_to_process, :jobs_per_cycle, :active)
+    params.require(:work_manager).permit(:id, :name, :aws_region, :autoscalinggroup_name, :queue_name, :max_workers, :min_workers, :max_workers_off, :min_workers_off, :minutes_to_process, :jobs_per_cycle, :active)
   end
 
 end

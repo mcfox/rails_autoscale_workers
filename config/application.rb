@@ -38,5 +38,6 @@ module Asworkers
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.secret_key_base = 'dfFSDFFSDFw4r5234324'
   end
 end
