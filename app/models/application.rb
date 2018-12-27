@@ -57,12 +57,22 @@ class Application < ApplicationRecord
     apps = []
     self.order(:name).each do |app|
       app.work_managers.each do |work_mgr|
-        apps << {
-            name: app.name,
-            queue: work_mgr.name,
-            jobs: work_mgr.jobs_count,
-            workers: work_mgr.workers_count
-        }
+        begin
+          workers_count = work_mgr.workers_count
+          apps << {
+              name: app.name,
+              queue: work_mgr.name,
+              jobs: work_mgr.jobs_count,
+              workers: workers_count
+          }
+        rescue => e
+          apps << {
+              name: "#{app.name} #{e.message}",
+              queue: work_mgr.name,
+              jobs: work_mgr.jobs_count,
+              workers: 0
+          }
+        end
       end
     end
     apps

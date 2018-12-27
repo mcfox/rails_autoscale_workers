@@ -18,12 +18,13 @@
 //= require screenfull.min
 //= require pace.min
 //= require chart.min
-//= require echarts
 
 // -- APP
 //= require app-menu
 //= require app
 //= require events
+
+//= require chartkick
 
 // -- CUSTOM
 //= require_self

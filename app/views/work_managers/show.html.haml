@@ -15,3 +15,8 @@
         = render 'item'
       .col-md-6.col-lg-8
         = render 'last_cycles', application: @application, work_manager: @work_manager, cycles: @work_manager.cycles
+        .card
+          .card-header
+            %h3 Gráfico
+          .card-contents
+            = line_chart @cycle_series

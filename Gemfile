@@ -23,9 +23,13 @@ gem 'aws-sdk', '~> 2.0'
 gem 'aws-sdk-rails', '~> 1.0'
 gem 'rest-client', '~> 2.0'
 gem 'enumerize', '~> 2.2'
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', '>= 2.1.1', groups: [:development, :test]
 gem 'jquery-rails'
+gem 'chartkick'
+gem 'groupdate'
 gem 'annotate'
+gem "loofah", ">= 2.2.3"
+gem "rack", ">= 2.0.6"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -26,6 +26,8 @@ class WorkManager < ApplicationRecord
   belongs_to :application
   has_many :cycles, dependent: :destroy
 
+  include CheckService
+
   scope :active, -> { where(active: true) }
 
   validates :name, :aws_region, :autoscalinggroup_name, :queue_name, :max_workers, :min_workers, :minutes_to_process, :jobs_per_cycle, :application, presence: true
@@ -38,6 +40,7 @@ class WorkManager < ApplicationRecord
   end
 
   after_save :verify_changes
+
   def verify_changes
     self.cycles.destroy_all if self.queue_name_previously_changed?
   end
@@ -47,7 +50,7 @@ class WorkManager < ApplicationRecord
   end
 
   def total_intervals_period?
-    (self.minutes_to_process.to_f / CheckService.cycle_interval.to_f).ceil
+    (self.minutes_to_process.to_f / self.cycle_interval.to_f).ceil
   end
 
   def viable?
@@ -58,11 +61,45 @@ class WorkManager < ApplicationRecord
     jobs = JobsService.new(self.application.jobs_url).queue_jobs(self.queue_name)
     jobs[:total_jobs]
   rescue => e
+    puts e.message
     0
   end
 
   def workers_count
     AwsService.new(self.cycles.last).total_instances
+  end
+
+  def desired_cycles
+    [(self.minutes_to_process / self.minutes_between_cycles).to_i,1].max
+  rescue
+    1
+  end
+
+
+
+  def save_workset(workeset)
+    self.workset_array = workeset.to_json
+    self.save
+  end
+
+  def workset
+    if self.workset_array.present?
+      JSON.parse(self.workset_array)
+    else
+      []
+    end
+  end
+
+  def workers_map
+    final_workers = []
+    workset.each do |set|
+      set.each_with_index do |workers_count,i|
+        final_workers[i] = (final_workers[i] || 0) + workers_count
+      end
+    end
+    wm = final_workers.join('|')
+    puts wm
+    wm
   end
 
 end

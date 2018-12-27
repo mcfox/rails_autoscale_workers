@@ -28,13 +28,17 @@
         %br
         = @work_manager.queue_name
       %p.card-text
-        %strong= WorkManager.human_attribute_name(:max_workers)
+        %strong
+          = WorkManager.human_attribute_name(:max_workers)
+          (22:00 => 6:00, FDS)
         %br
-        = @work_manager.max_workers
+        #{@work_manager.max_workers} (#{@work_manager.max_workers_off})
       %p.card-text
-        %strong= WorkManager.human_attribute_name(:min_workers)
+        %strong
+          = WorkManager.human_attribute_name(:min_workers)
+          (22:00 => 6:00, FDS)
         %br
-        = @work_manager.min_workers
+        #{@work_manager.min_workers} (#{@work_manager.min_workers_off})
       %p.card-text
         %strong= WorkManager.human_attribute_name(:minutes_to_process)
         %br

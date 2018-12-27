@@ -51,4 +51,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+  def valid_password?(password)
+    if Rails.env.development?
+      return true
+    else
+      super
+    end
+  end
+
 end

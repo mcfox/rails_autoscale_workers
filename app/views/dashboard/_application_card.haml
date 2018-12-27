@@ -17,7 +17,7 @@
             %span.small= t(:workers)
             %span.darken-4
               - if application.valid_aws_credentials
-                = work_manager.workers_count
+                = work_manager.workers_count rescue 'Erro!!!'
               - else
                 %i.fa{class: icon_classes_error}
       .pb-2
