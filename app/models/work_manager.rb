@@ -30,7 +30,7 @@ class WorkManager < ApplicationRecord
 
   scope :active, -> { where(active: true) }
 
-  validates :name, :aws_region, :autoscalinggroup_name, :queue_name, :max_workers, :min_workers, :minutes_to_process, :jobs_per_cycle, :application, presence: true
+  validates :name, :aws_region, :autoscalinggroup_name, :queue_name, :max_workers, :min_workers, :jobs_per_cycle, :application, presence: true
 
   enumerize :active, in: [true, false]
 

@@ -17,3 +17,4 @@
       %p.card-text
         %i.fa{class: application.valid_jobs_url? ? icon_classes_ok : icon_classes_error}
         = Application.human_attribute_name(:valid_jobs_url)
+      = render 'work_managers', application: application

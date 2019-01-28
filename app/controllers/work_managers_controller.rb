@@ -6,8 +6,8 @@ class WorkManagersController < ApplicationController
   def show
     cycles = @work_manager.cycles.order('created_at desc').limit(200)
     @workers_series = cycles.map{|c| [c.id.to_s, c.workers ]}.reverse
-    @desired_workers_series = cycles.map{|c| [c.id.to_s, c.desired_workers ]}.reverse
-    @cycle_series = [{name: "Workers", data: @workers_series},{name: "Desired", data: @desired_workers_series}]
+    @jobs_series = cycles.map{|c| [c.id.to_s, c.queue_jobs ]}.reverse
+    @cycle_series = [{name: "Workers", data: @workers_series},{name: "Jobs", data: @jobs_series}]
   end
 
   def new

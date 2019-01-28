@@ -11,4 +11,5 @@
     %section.card-headings
       .row
         - @applications.each do |application|
-          .col-sm-6.col-lg-4= render 'item', application: application
+          .col-sm-6.col-lg-4
+            = render 'item', application: application
