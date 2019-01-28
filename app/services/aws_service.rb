@@ -20,6 +20,9 @@ class AwsService
     autoscalinggroups({auto_scaling_group_names: [name]}).first
   end
 
+
+  # To target a specific instance for immediate termination, you can also use the TerminateInstanceInAutoScalingGroup API.
+  # 
   def change_instance_to(desired_workers)
     workers = calculate_viable_number_of_workers(desired_workers)
     cycle.update(workers: workers, current_workers: total_instances)

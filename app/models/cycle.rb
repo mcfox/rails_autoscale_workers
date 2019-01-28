@@ -31,13 +31,10 @@ class Cycle < ApplicationRecord
   def calc_desired_workers(current_workers)
     wm = self.work_manager
     scaler = ScaleAlgorithim.new(wm.queue_name,
-                                 wm.desired_cycles,
                                  wm.jobs_per_cycle,
-                                 wm.workset,
                                  wm.min_workers,
                                  wm.max_workers)
-    workers, workeset = scaler.desired_workers(self.queue_jobs, self.new_jobs, self.processed_jobs, current_workers)
-    wm.save_workset workeset
+    workers = scaler.desired_workers(self.queue_jobs, self.new_jobs, self.processed_jobs, current_workers)
     self.desired_workers = workers
     self.workers = workers
     self.save!
