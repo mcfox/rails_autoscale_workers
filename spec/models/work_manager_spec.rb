@@ -36,13 +36,13 @@ RSpec.describe WorkManager, type: :model do
     # tenho que ter apenas 1 worker
     allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 30, total_jobs: 30, processed_jobs: 0 })
     @wm1.check
-    expect(@wm1.cycles.last.desired_workers).to eq(1)
+    expect(@wm1.cycles.last.desired_workers).to eq(3)
 
     # se cair 150 jobs
     # tenho que ter 5 workers
     allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 150, total_jobs: 150 })
     @wm1.check
-    expect(@wm1.cycles.last.desired_workers).to eq(1+5)
+    expect(@wm1.cycles.last.desired_workers).to eq(10)
 
     # se cair 300 jobs
     # tenho que ter 10 workers
@@ -63,22 +63,16 @@ RSpec.describe WorkManager, type: :model do
 
   end
 
-  it 'testando workers map para o esperado' do
-    allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 600, total_jobs: 600 })
-    @wm1.check
-    expect(@wm1.workers_map).to eq('10|10|10|10|10|10')
-
-  end
 
   it 'deve processar o deficit de um ciclo nos próximos' do
 
     allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 0, total_jobs: 0 })
     @wm1.check
-    expect(@wm1.workers_map).to eq('0|0|0')
+    expect(@wm1.workers).to eq(0)
 
     allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 150, total_jobs: 150 })
     @wm1.check
-    expect(@wm1.workers_map).to eq('5|5|5')
+    expect(@wm1.workers).to eq(10)
 
     # processou somente 90, e caiu mais 30, deficet de 60
     allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 30, total_jobs: 150-30+30 })
@@ -86,19 +80,19 @@ RSpec.describe WorkManager, type: :model do
     # 5|5 ciclo anterior
     # 2|2|2 novo ciclo (30) + deficit de processamento (20)
     # 7|7|2 final
-    expect(@wm1.workers_map).to eq('7|7|2')
+    expect(@wm1.workers).to eq(10)
 
     allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 0, total_jobs: 80 })
     @wm1.check
-    expect(@wm1.workers_map).to eq('7|2|0')
+    expect(@wm1.workers).to eq(8)
 
     allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 0, total_jobs: 10 })
     @wm1.check
-    expect(@wm1.workers_map).to eq('2|0|0')
+    expect(@wm1.workers).to eq(1)
 
     allow_any_instance_of(JobsService).to receive(:queue_jobs).and_return({ new_jobs: 0, total_jobs: 0 })
     @wm1.check
-    expect(@wm1.workers_map).to eq('0|0|0')
+    expect(@wm1.workers).to eq(0)
 
   end
 

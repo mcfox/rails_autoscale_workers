@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe ScaleAlgorithim, type: :model do
 
   before(:each) do
-    @worker_capacity = 100
-    @scaler = ScaleAlgorithim.new('Teste', 3, @worker_capacity, [], 0, 20)
+    @worker_capacity = 1000
+    @scaler = ScaleAlgorithim.new('Teste',  @worker_capacity, 0, 200)
   end
 
   it 'deve comsumir uma fila no prazo definido se não tivermos limite de maquinad' do
@@ -46,7 +46,7 @@ RSpec.describe ScaleAlgorithim, type: :model do
 
   def run_cycle(carga)
     @jobs_in_queue += carga
-    @current_workers = @scaler.desired_workers(@jobs_in_queue, carga, @processed, @current_workers)[0]
+    @current_workers = @scaler.desired_workers(@jobs_in_queue, carga, @processed, @current_workers)
     @processed = [@worker_capacity * @current_workers, @jobs_in_queue].min
     # print_workers
     @jobs_in_queue -= @processed

@@ -75,31 +75,14 @@ class WorkManager < ApplicationRecord
     1
   end
 
-
-
-  def save_workset(workeset)
-    self.workset_array = workeset.to_json
-    self.save
-  end
-
-  def workset
-    if self.workset_array.present?
-      JSON.parse(self.workset_array)
+  def workers
+    last_cycle = self.cycles.last
+    if last_cycle
+      last_cycle.workers
     else
-      []
+      0
     end
   end
 
-  def workers_map
-    final_workers = []
-    workset.each do |set|
-      set.each_with_index do |workers_count,i|
-        final_workers[i] = (final_workers[i] || 0) + workers_count
-      end
-    end
-    wm = final_workers.join('|')
-    # puts wm
-    wm
-  end
 
 end

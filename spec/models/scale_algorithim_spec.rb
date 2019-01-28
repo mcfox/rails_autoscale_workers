@@ -4,7 +4,7 @@ RSpec.describe ScaleAlgorithim, type: :model do
 
   before(:each) do
     @worker_capacity = 150  # 150 jobs por ciclo
-    @scaler = ScaleAlgorithim.new('Teste', 1, @worker_capacity, [], 0, 200)
+    @scaler = ScaleAlgorithim.new('Teste',  @worker_capacity,  0, 200)
   end
 
   it 'deve processar todos os jopbs no SLA definido se não tivermos limite de maquinas' do
@@ -67,7 +67,7 @@ RSpec.describe ScaleAlgorithim, type: :model do
 
   def run_cycle(carga)
     @jobs_in_queue += carga
-    @current_workers = @scaler.desired_workers(@jobs_in_queue, carga, @processed, @current_workers)[0]
+    @current_workers = @scaler.desired_workers(@jobs_in_queue, carga, @processed, @current_workers)
     # print_workers
     @processed = [@worker_capacity * @current_workers, @jobs_in_queue].min
     @jobs_in_queue -= @processed
