@@ -28,8 +28,9 @@ pt-BR:
         queue_name: 'Nome da Fila'
         max_workers: 'Máximo de Workers'
         min_workers: 'Mínimo de Workers'
-        minutes_to_process: 'Tempo Esperado de Processamento'
-        jobs_per_cycle: 'Jobs estimados por hora'
+        minutes_between_cycles: Duração do ciclo em minutos
+        minutes_to_process: Tempo Esperado de Processamento
+        jobs_per_cycle: Num de Jobs estimados a processar por CICLO'
         active: 'Ativo?'
     hints:
       application:

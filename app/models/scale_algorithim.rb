@@ -13,7 +13,7 @@ class ScaleAlgorithim
     required_workers = (total.to_f/ @worker_capacity_per_cycle.to_f).ceil
     # casos extremoa para garantir
     # mas se tiver um job, tenho um worker
-    if required_workers == 0 && total > 0
+    if total > 0 && required_workers == 0
       required_workers = 1
     end
     # se não tenho nada, não tenho worker
