@@ -87,18 +87,26 @@ class WorkManager < ApplicationRecord
 
   def current_workers
     AwsService.new(self).total_instances
+  rescue => e
+    puts e.message
+    0
   end
 
   def current_jobs
     jobs_count
+  rescue => e
+    puts e.message
+    0
   end
 
   def update_history
-    # history = [
-    #     {name: "Workers", data: workers},
-    #     {name: "Jobs", data: jobs}
-    # ]
     history = self.history
+    unless history.is_a?(Array) and history[0].present?
+      history = [
+           {'name' =>  'Workers', 'data' => []},
+           {'name' => 'Jobs', 'data' => []}
+      ]
+    end
     workers = history[0]['data']
     jobs = history[1]['data']
     i = Time.now.strftime('%H:%M:%S')

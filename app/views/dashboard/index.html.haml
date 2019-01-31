@@ -3,20 +3,14 @@
     %h3.content-header-title.mb-0
       %p= t :dashboard
   .content-body
-    %h3 Aplicativos
-    %br
+    %h3 Filas sendo controladas:
     %br
     - if @applications.count == 0
       %p Você não tem nenhum Applicativo cadastrado.
     - else
       - @applications.each do |application|
-        %h4= application.name.capitalize
-        %br
-          - if application.work_managers.count == 0
-            %p Você não tem nenhum Gerenciador cadastrado.
-          - else
-            - application.work_managers.each do |work_manager|
-              = render 'application_card', application: application,  work_manager: work_manager
+        - application.work_managers.each do |work_manager|
+          = render 'application_card', application: application,  work_manager: work_manager
     .row
       .col-xl-4.col-12
         - if user_signed_in?

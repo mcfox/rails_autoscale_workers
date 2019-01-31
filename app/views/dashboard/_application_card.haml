@@ -1,10 +1,10 @@
-.card.crypto-card-3.pull-up
-  .card-content
-    .card-body.pb-0
+.card{ style: "display: inline-grid; width: 20rem;" }
+  .card-body
+    .card-text
       .row
         .col-6.pl-2
-          %h4= link_to application.name, application
-          %h6.text-muted= link_to work_manager.queue_name, [application, work_manager]
+          %h4= link_to work_manager.queue_name, [application, work_manager]
+          %h6.text-muted= link_to application.name, application
         .col-6.text-right
           %h5
             %span.small= t(:jobs)
@@ -20,10 +20,3 @@
                 = work_manager.workers_count rescue 'Erro!!!'
               - else
                 %i.fa{class: icon_classes_error}
-      .pb-2
-        -#.row
-        -#  .col-12
-        -#    - if application.valid_jobs_url? && application.valid_jobs_url?
-        -#      %canvas#btc-chartjs.height-75
-        -#    - else
-        -#      .mt-2
