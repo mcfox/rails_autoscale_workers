@@ -3,13 +3,11 @@ class AwsService
   attr_reader :cycle, :work_manager, :aws
   attr_accessor :autoscalinggroup
 
-  def initialize(cycle)
-    @cycle = cycle.is_a?(Cycle) ? cycle : Cycle.find_by(id: cycle)
-    if @cycle
-      @work_manager = @cycle.work_manager
-      @aws = Aws::AutoScaling::Resource.new(region: @work_manager.aws_region, credentials: Aws::Credentials.new(@work_manager.application.aws_access_key_id, @work_manager.application.aws_secret_access_key))
-      @autoscalinggroup = autoscalinggroup_by_name(@work_manager.autoscalinggroup_name)
-    end
+  def initialize(work_manager)
+    @work_manager = work_manager
+    @cycle = work_manager.cycles.last
+    @aws = Aws::AutoScaling::Resource.new(region: @work_manager.aws_region, credentials: Aws::Credentials.new(@work_manager.application.aws_access_key_id, @work_manager.application.aws_secret_access_key))
+    @autoscalinggroup = autoscalinggroup_by_name(@work_manager.autoscalinggroup_name)
   end
 
   def autoscalinggroups(options=nil)

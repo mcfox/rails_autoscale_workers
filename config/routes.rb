@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :work_managers, except: [:index] do
       member do
         get :check
+        get :chart_data
         delete :clear_cycles
       end
     end

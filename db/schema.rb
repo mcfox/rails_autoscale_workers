@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_21_150743) do
+ActiveRecord::Schema.define(version: 2019_01_30_215701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 2018_12_21_150743) do
     t.integer "max_workers_off", default: 1
     t.string "description"
     t.text "workset_array"
+    t.json "history"
     t.index ["application_id"], name: "index_work_managers_on_application_id"
   end
 

@@ -20,33 +20,21 @@
         %table.table.table-hover.table-striped.mb-0
           %thead
             %tr
-              -#- if defined?(application) && !defined?(worker_manager)
-              -#  %th= Cycle.human_attribute_name(:work_manager)
-              -#%th= Cycle.human_attribute_name(:queue_jobs)
-              %th Ciclo
-              %th= Cycle.human_attribute_name(:new_jobs)
-              %th= Cycle.human_attribute_name(:processed_jobs)
-              %th
-                Corrente => Desejado
-                %br
-                (Desejado sem limites)
               %th= Cycle.human_attribute_name(:updated_at)
+              %th= Cycle.human_attribute_name(:new_jobs)
+              %th= Cycle.human_attribute_name(:queue_jobs)
+              %th Workers nesse momento
+              %th Alterando para
+              %th Necessários
           %tbody
             - cycles.last_cycles.each do |cycle|
               %tr
-                -#- if defined?(application) && !defined?(worker_manager)
-                -#  %td= link_to cycle.work_manager.name, [application, cycle.work_manager]
-                -#%td= cycle.queue_jobs
-                %td= cycle.id
+                %td= time_ago_in_words cycle.updated_at
                 %td= cycle.new_jobs
                 %td= cycle.processed_jobs
-                %td{ title: " current_workers => workers ( desired_workers )"}
-                  #{cycle.current_workers} => #{cycle.workers}
-                  %br
-                  (#{cycle.desired_workers})
-                %td
-                  = time_ago_in_words cycle.updated_at
-                  atrás
+                %td= cycle.current_workers
+                %td= cycle.workers
+                %td= cycle.desired_workers
     - else
       .card-body.pt-0
         .alert.alert-info= t(:no_records_found)

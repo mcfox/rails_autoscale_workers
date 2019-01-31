@@ -1,13 +1,9 @@
 class WorkManagersController < ApplicationController
 
   before_action :set_application
-  before_action :set_work_manager, only: [:show, :edit, :update, :destroy, :active, :check, :clear_cycles]
+  before_action :set_work_manager, only: [:show, :edit, :update, :destroy, :active, :check, :clear_cycles, :chart_data]
 
   def show
-    cycles = @work_manager.cycles.order('created_at desc').limit(200)
-    @workers_series = cycles.map{|c| [c.id.to_s, c.workers ]}.reverse
-    @jobs_series = cycles.map{|c| [c.id.to_s, c.queue_jobs ]}.reverse
-    @cycle_series = [{name: "Workers", data: @workers_series},{name: "Jobs", data: @jobs_series}]
   end
 
   def new
@@ -35,7 +31,7 @@ class WorkManagersController < ApplicationController
 
   def check
     begin
-      CheckService.new(@work_manager).check
+      @work_manager.check
       flash[:success] = 'Checagem Efetuada!'
     rescue => e
       flash[:error] = "Ocorreu um erro ao tentar efetuar a checagem: #{e.message} : #{e.backtrace}"[0..1200]
@@ -47,6 +43,10 @@ class WorkManagersController < ApplicationController
   def clear_cycles
     @work_manager.cycles.destroy_all
     respond_with(@application, @work_manager)
+  end
+
+  def chart_data
+    respond_with(@work_manager.update_history)
   end
 
   private

@@ -40,17 +40,9 @@
         %br
         #{@work_manager.min_workers} (#{@work_manager.min_workers_off})
       %p.card-text
-        %strong= WorkManager.human_attribute_name(:minutes_to_process)
-        %br
-        = @work_manager.minutes_to_process
-      %p.card-text
         %strong= WorkManager.human_attribute_name(:jobs_per_cycle)
         %br
         = @work_manager.jobs_per_cycle
-      %p.card-text
-        %strong= WorkManager.human_attribute_name(:last_check)
-        %br
-        = l(@work_manager.last_check, format: :short) if @work_manager.last_check.present?
       - if @work_manager.last_error.present?
         %p.card-text
           %strong= WorkManager.human_attribute_name(:last_error)

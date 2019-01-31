@@ -37,6 +37,7 @@ class WorkManager < ApplicationRecord
   before_save :default_values
   def default_values
     # self.last_check ||= Time.now
+    self.history ||= [{name: "Workers", data: []},{name: "Jobs", data: []}]
   end
 
   after_save :verify_changes
@@ -84,5 +85,29 @@ class WorkManager < ApplicationRecord
     end
   end
 
+  def current_workers
+    AwsService.new(self).total_instances
+  end
+
+  def current_jobs
+    jobs_count
+  end
+
+  def update_history
+    # history = [
+    #     {name: "Workers", data: workers},
+    #     {name: "Jobs", data: jobs}
+    # ]
+    history = self.history
+    workers = history[0]['data']
+    jobs = history[1]['data']
+    i = Time.now.strftime('%H:%M:%S')
+    workers << [i,self.current_workers]
+    jobs << [i,self.current_jobs]
+    workers.shift if workers.size > 120
+    jobs.shift if jobs.size > 120
+    self.update_attribute(:history, history)
+    history
+  end
 
 end

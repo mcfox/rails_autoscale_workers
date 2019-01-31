@@ -42,7 +42,7 @@ module CheckService
     if self.active? && self.viable?
       cycle = create_new_cycle
       if cycle.is_a?(Cycle)
-        aws_connection = AwsService.new(cycle)
+        aws_connection = AwsService.new(self)
         if aws_connection
           aws_connection.change_instance_to(cycle.desired_workers)
         else
