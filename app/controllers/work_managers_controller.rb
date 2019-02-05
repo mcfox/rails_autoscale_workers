@@ -4,6 +4,49 @@ class WorkManagersController < ApplicationController
   before_action :set_work_manager, only: [:show, :edit, :update, :destroy, :active, :check, :clear_cycles, :chart_data]
 
   def show
+    @data = [{name: 'workers', data: []}, {name: 'jobs', data: []}]
+    @chart_options = {
+        width: 400,
+        height: 240,
+        title: 'Jobs x Workers',
+        series: {
+          0 => {axis: 'jobs'},
+          1 => {axis: 'workers'},
+          2 => {axis: 'workers'}
+        },
+        vAxes: {
+            0 => {title: 'Jobs'},
+            1 => {title: 'Workers'},
+            2 => {title: 'Workers'}
+        }
+    }
+
+    @chart_options2 = {
+        vAxis: [0 => {format: '#'}, 1 => {format: '#'}],
+        hAxis: { title: "Hora", format: 'H:M:S'},
+        series: {
+          0 => { type: "line", targetAxisIndex: 0 },
+          1 =>  { type: "line", targetAxisIndex: 1}
+        }
+    }
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Time' )
+    data_table.new_column('number', 'Jobs' )
+    data_table.new_column('number', 'Workers')
+    data_table.add_rows([['Agora',10,20]])
+    @chart = GoogleVisualr::Interactive::LineChart.new(data_table, @chart_options2)
+
+    # @chart_options = {
+    #     series: {
+    #         0 => {targetAxisIndex: 0},
+    #         1 => {targetAxisIndex: 1}
+    #     },
+    #     vAxes: {
+    #         0 => {title: 'Temps (Celsius)'},
+    #         1 => {title: 'Daylight'}
+    #     },
+    # }
   end
 
   def new
@@ -46,10 +89,11 @@ class WorkManagersController < ApplicationController
   end
 
   def chart_data
-    respond_with(@work_manager.update_history)
+    respond_with(@work_manager.current_status)
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_work_manager
     @work_manager = @application.work_managers.find(params[:id])
@@ -64,4 +108,39 @@ class WorkManagersController < ApplicationController
     params.require(:work_manager).permit(:id, :name, :aws_region, :autoscalinggroup_name, :queue_name, :max_workers, :min_workers, :max_workers_off, :min_workers_off, :minutes_to_process, :jobs_per_cycle, :active)
   end
 
+  def x
+    {
+        "type": "line",
+        "data": {"labels": [], "datasets": [{"label": "workers", "data": [], "fill": false, "borderColor": "#3366CC", "backgroundColor": "#3366CC", "pointBackgroundColor": "#3366CC", "borderWidth": 2, "pointHoverBackgroundColor": "#3366CC"}, {"label": "jobs", "data": [], "fill": false, "borderColor": "#DC3912", "backgroundColor": "#DC3912", "pointBackgroundColor": "#DC3912", "borderWidth": 2, "pointHoverBackgroundColor": "#DC3912"}]},
+        "options": {
+            "maintainAspectRatio": false,
+            "animation": false,
+            "tooltips": {"displayColors": false, "callbacks": {}},
+            "legend": {},
+            "title": {"fontSize": 20, "fontColor": "#333"},
+            "scales": {
+                     "yAxes": [
+                         {
+                             "ticks": {"maxTicksLimit": 4, "min": 0, "max": 1},
+                              "scaleLabel": {"fontSize": 16, "fontColor": "#333"}
+                         }
+                     ],
+                     "xAxes": [
+                         {
+                             "gridLines": {"drawOnChartArea": false},
+                             "scaleLabel": {"fontSize": 16, "fontColor": "#333"},
+                             "time": {},
+                             "ticks": {},
+                             "type": "linear",
+                             "position": "bottom"
+                         }
+                     ]
+                 },
+             "series": {"0": {"targetAxisIndex": 0}, "1": {"targetAxisIndex": 1}},
+             "vAxes": {"0": {"title": "Temps (Celsius)"}, "1": {"title": "Daylight"}}
+     }
+    }
+
+
+  end
 end

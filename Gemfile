@@ -30,6 +30,7 @@ gem 'groupdate'
 gem 'annotate'
 gem "loofah", ">= 2.2.3"
 gem "rack", ">= 2.0.6"
+gem "google_visualr"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

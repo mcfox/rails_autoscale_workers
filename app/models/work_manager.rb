@@ -99,6 +99,35 @@ class WorkManager < ApplicationRecord
     0
   end
 
+  def average_speed
+    cycles = self.cycles.order('created_at desc').limit(10).all
+    prev_speed = 0
+    avg_speed = 0
+    (0..cycles.size-1).each do |i|
+      q1 = cycles[i].queue_jobs
+      if i < cycles.size - 2
+        q2 = (cycles[i+1].queue_jobs || 0)
+        jobs = q2 - q1
+        speed = jobs / ((self.minutes_between_cycles || 5))
+      end
+      if prev_speed && prev_speed > 0
+        avg_speed = (prev_speed + speed)/2
+      else
+        avg_speed = speed
+      end
+      prev_speed = speed
+    end
+    (avg_speed || 0.0).round(2)
+  end
+
+
+  def current_status
+    i = Time.now.strftime('%H:%M:%S')
+    workers = [i,self.current_workers]
+    jobs = [i,self.current_jobs]
+    [workers,jobs]
+  end
+
   def update_history
     history = self.history
     unless history.is_a?(Array) and history[0].present?

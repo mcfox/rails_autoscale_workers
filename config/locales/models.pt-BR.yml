@@ -38,6 +38,7 @@ pt-BR:
         min_workers_off: 'Mín. de Workers (fora do expediente)'
         minutes_to_process: 'Minutos para processamento'
         jobs_per_cycle: 'Jobs por ciclo'
+        average_speed: Velocidade Média
         minutes_between_cycles: 'Minutos entre os ciclos'
         active: 'Ativos?'
         last_check: 'Última Checagem'

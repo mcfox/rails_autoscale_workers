@@ -51,3 +51,10 @@
         %strong= WorkManager.human_attribute_name(:active)
         %br
         = @work_manager.active_text
+      %p.card-text
+        %strong= WorkManager.human_attribute_name(:average_speed)
+        %br
+        \~
+        = @work_manager.average_speed
+        jobs/min
+

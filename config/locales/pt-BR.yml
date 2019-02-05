@@ -18,6 +18,7 @@ pt-BR:
   show: 'Exibir'
   running: 'Executando...'
   expand: 'Ampliar'
+  average_speed: Vel Média de Processamento
   aws:
     errors:
       checksum_error: 'Checksum failed'

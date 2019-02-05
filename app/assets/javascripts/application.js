@@ -17,13 +17,14 @@
 //= require jquery-sliding-menu
 //= require screenfull.min
 //= require pace.min
-//= require chart.min
 
 // -- APP
 //= require app-menu
 //= require app
 //= require events
 
+//= require moment/moment
+//= require chart.min
 //= require chartkick
 
 // -- CUSTOM

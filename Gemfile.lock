@@ -111,6 +111,7 @@ GEM
       thor (~> 0.19.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    google_visualr (2.5.1)
     groupdate (4.1.1)
       activesupport (>= 4.2)
     haml (5.0.4)
@@ -296,6 +297,7 @@ DEPENDENCIES
   dotenv-rails (>= 2.1.1)
   enumerize (~> 2.2)
   foreman (~> 0.6)
+  google_visualr
   groupdate
   haml (~> 5.0)
   jbuilder (~> 2.5)
