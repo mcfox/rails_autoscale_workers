@@ -20,18 +20,16 @@
         %table.table.table-hover.table-striped.mb-0
           %thead
             %tr
-              %th= Cycle.human_attribute_name(:updated_at)
-              %th= Cycle.human_attribute_name(:new_jobs)
-              %th= Cycle.human_attribute_name(:queue_jobs)
-              %th Workers nesse momento
+              %th 
+              %th Jobs na fila
+              %th Workers
               %th Alterando para
               %th Necessários
           %tbody
             - cycles.last_cycles.each do |cycle|
               %tr
                 %td= time_ago_in_words cycle.updated_at
-                %td= cycle.new_jobs
-                %td= cycle.processed_jobs
+                %td= cycle.queue_jobs
                 %td= cycle.current_workers
                 %td= cycle.workers
                 %td= cycle.desired_workers

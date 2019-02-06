@@ -2,7 +2,7 @@
   .card-header
     %h4.card-title= @work_manager.name
     .heading-elements
-      .btn-group{"aria-label" => "Basic example", :role => "group"}
+      .btn-group
         = link_to edit_application_work_manager_path(@application, @work_manager), class: 'btn btn-sm btn-outline-secondary', title: 'Editar' do
           %i.fa.fa-edit
           = t(:edit)
@@ -12,25 +12,11 @@
   .card-content
     .card-body.pt-0
       %p.card-text
-        %strong= WorkManager.human_attribute_name(:name)
-        %br
-        = @work_manager.name
-      %p.card-text
-        %strong= WorkManager.human_attribute_name(:autoscalinggroup_name)
-        %br
-        = @work_manager.autoscalinggroup_name
-      %p.card-text
-        %strong= WorkManager.human_attribute_name(:aws_region)
-        %br
-        = @work_manager.aws_region
-      %p.card-text
         %strong= WorkManager.human_attribute_name(:queue_name)
         %br
         = @work_manager.queue_name
       %p.card-text
-        %strong
-          = WorkManager.human_attribute_name(:max_workers)
-          (22:00 => 6:00, FDS)
+        %strong= WorkManager.human_attribute_name(:max_workers)
         %br
         #{@work_manager.max_workers} (#{@work_manager.max_workers_off})
       %p.card-text

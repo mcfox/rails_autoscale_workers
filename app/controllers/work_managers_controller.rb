@@ -78,39 +78,4 @@ class WorkManagersController < ApplicationController
     params.require(:work_manager).permit(:id, :name, :aws_region, :autoscalinggroup_name, :queue_name, :max_workers, :min_workers, :max_workers_off, :min_workers_off, :minutes_to_process, :jobs_per_cycle, :active)
   end
 
-  def x
-    {
-        "type": "line",
-        "data": {"labels": [], "datasets": [{"label": "workers", "data": [], "fill": false, "borderColor": "#3366CC", "backgroundColor": "#3366CC", "pointBackgroundColor": "#3366CC", "borderWidth": 2, "pointHoverBackgroundColor": "#3366CC"}, {"label": "jobs", "data": [], "fill": false, "borderColor": "#DC3912", "backgroundColor": "#DC3912", "pointBackgroundColor": "#DC3912", "borderWidth": 2, "pointHoverBackgroundColor": "#DC3912"}]},
-        "options": {
-            "maintainAspectRatio": false,
-            "animation": false,
-            "tooltips": {"displayColors": false, "callbacks": {}},
-            "legend": {},
-            "title": {"fontSize": 20, "fontColor": "#333"},
-            "scales": {
-                     "yAxes": [
-                         {
-                             "ticks": {"maxTicksLimit": 4, "min": 0, "max": 1},
-                              "scaleLabel": {"fontSize": 16, "fontColor": "#333"}
-                         }
-                     ],
-                     "xAxes": [
-                         {
-                             "gridLines": {"drawOnChartArea": false},
-                             "scaleLabel": {"fontSize": 16, "fontColor": "#333"},
-                             "time": {},
-                             "ticks": {},
-                             "type": "linear",
-                             "position": "bottom"
-                         }
-                     ]
-                 },
-             "series": {"0": {"targetAxisIndex": 0}, "1": {"targetAxisIndex": 1}},
-             "vAxes": {"0": {"title": "Temps (Celsius)"}, "1": {"title": "Daylight"}}
-     }
-    }
-
-
-  end
 end
