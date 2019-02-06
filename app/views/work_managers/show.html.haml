@@ -15,10 +15,9 @@
         = render 'item'
       .col-md-6.col-lg-8
         .card
-          .card-header
-            %h3 Monitoramento
           .card-contents
-            = line_chart(@data, id: :workers_monit)
+            = line_chart(@jobs, id: :jobs_monit,  height: "120px" )
+            = line_chart(@workers, id: :workers_monit,  height: "120px" )
 
         = render 'last_cycles', application: @application, work_manager: @work_manager, cycles: @work_manager.cycles
 
@@ -26,19 +25,22 @@
 
 :javascript
   $(document).ready(function() {
-    var chart_data = [{ name: 'workers', data: [] } , {name: 'jobs', data: [] }];
-    var g = Chartkick.charts["workers_monit"]
+    var jobs_data = [ {name: 'jobs', data: [] }];
+    var workers_data = [{ name: 'workers', data: [] }];
+    var jobs_chart = Chartkick.charts["jobs_monit"]
+    var workers_chart = Chartkick.charts["workers_monit"]
     var url = "#{chart_data_application_work_manager_path(format: :json)}"
 
     function update_chart(){
       $.get( url, function( data ) {
         // alert(chart_data);
-        chart_data[0]['data'].push(data[0]);
-        chart_data[1]['data'].push(data[1]);
-        g.updateData(chart_data);
+        jobs_data[0]['data'].push(data[0]);
+        workers_data[0]['data'].push(data[1]);
+        jobs_chart.updateData(jobs_data);
+        workers_chart.updateData(workers_data);
       });
     }
     update_chart();
-    window.intervalId = setInterval(update_chart, 30000);
+    window.intervalId = setInterval(update_chart, 15000);
     }
   );

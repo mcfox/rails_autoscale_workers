@@ -4,10 +4,11 @@ class WorkManagersController < ApplicationController
   before_action :set_work_manager, only: [:show, :edit, :update, :destroy, :active, :check, :clear_cycles, :chart_data]
 
   def show
-    @data = [{name: 'workers', data: []}, {name: 'jobs', data: []}]
+    @jobs = [{name: 'jobs', data: []}]
+    @workers = [{name: 'workers', data: []}]
     @chart_options = {
         width: 400,
-        height: 240,
+        height: 100,
         title: 'Jobs x Workers',
         vAxis: [0 => {format: '#'}, 1 => {format: '#'}],
         hAxis: { title: "Hora", format: 'H:M:S'},
