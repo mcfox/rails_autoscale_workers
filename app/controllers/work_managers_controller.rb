@@ -9,19 +9,6 @@ class WorkManagersController < ApplicationController
         width: 400,
         height: 240,
         title: 'Jobs x Workers',
-        series: {
-          0 => {axis: 'jobs'},
-          1 => {axis: 'workers'},
-          2 => {axis: 'workers'}
-        },
-        vAxes: {
-            0 => {title: 'Jobs'},
-            1 => {title: 'Workers'},
-            2 => {title: 'Workers'}
-        }
-    }
-
-    @chart_options2 = {
         vAxis: [0 => {format: '#'}, 1 => {format: '#'}],
         hAxis: { title: "Hora", format: 'H:M:S'},
         series: {
@@ -29,24 +16,6 @@ class WorkManagersController < ApplicationController
           1 =>  { type: "line", targetAxisIndex: 1}
         }
     }
-
-    data_table = GoogleVisualr::DataTable.new
-    data_table.new_column('string', 'Time' )
-    data_table.new_column('number', 'Jobs' )
-    data_table.new_column('number', 'Workers')
-    data_table.add_rows([['Agora',10,20]])
-    @chart = GoogleVisualr::Interactive::LineChart.new(data_table, @chart_options2)
-
-    # @chart_options = {
-    #     series: {
-    #         0 => {targetAxisIndex: 0},
-    #         1 => {targetAxisIndex: 1}
-    #     },
-    #     vAxes: {
-    #         0 => {title: 'Temps (Celsius)'},
-    #         1 => {title: 'Daylight'}
-    #     },
-    # }
   end
 
   def new

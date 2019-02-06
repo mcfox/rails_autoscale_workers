@@ -15,24 +15,27 @@
         = render 'item'
       .col-md-6.col-lg-8
         .card
+          .card-header
+            %h3 Monitoramento
           .card-contents
-            #workers_monit
-            = render_chart(@chart, 'workers_monit')
+            = line_chart(@data, id: :workers_monit)
+
         = render 'last_cycles', application: @application, work_manager: @work_manager, cycles: @work_manager.cycles
 
 
 
 :javascript
   $(document).ready(function() {
+    var chart_data = [{ name: 'workers', data: [] } , {name: 'jobs', data: [] }];
+    var g = Chartkick.charts["workers_monit"]
     var url = "#{chart_data_application_work_manager_path(format: :json)}"
-    var containerDiv = document.getElementById('workers_monit');
-    var chart = new google.visualization.LineChart(containerDiv);
-    var chart_data = new google.visualization.DataTable();
 
     function update_chart(){
       $.get( url, function( data ) {
-        chart_data.insertRows(0, [[Date().getTime(), data[0], data[1]]]);
-        chart.draw(chart_data);
+        // alert(chart_data);
+        chart_data[0]['data'].push(data[0]);
+        chart_data[1]['data'].push(data[1]);
+        g.updateData(chart_data);
       });
     }
     update_chart();
