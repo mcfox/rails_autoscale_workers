@@ -11,13 +11,37 @@
 foreman start
 ```
 
+# References
+Esse problema é resolvido no Heroku atraves de Add Ons de tereceiros
 
-Functionalities
+https://www.hirefire.io
+https://elements.heroku.com/addons/rails-autoscale
+https://github.com/adamlogic/rails_autoscale_agent
+
+Porem, no AWS não temos nada semelhante, porem o problema é exatamente o mesmo
+Para resolver esse problema, foi criado esse aplicativop, que usa como critério 
+para o autoscaling o numero de jobs retornado pelo aplicativo
+
+
+
+# Instruções de Uso
+- No seu aplicativo, criar uma url que retorna o numero de jobs numa fila
+- Cadastre seu aplicativo informando as filas a serem controladas e qual url chamar para saber o numero de jobs
+- Informe o auto scaling a ser controlado juntamente com um key e um secret com direito de alterar seu desired capacity
+- Defina os parametros de controle: num máximo de maquinas, capcidade de processamento de uma maquina, ...
+- Pronto. Aogra acompanhe a variação para garantir que seus jobs estão sendo processados
+
+
+# TODO
+## Novas Funcionanlidades
+
+### Autoscaling de RDS
 
 Monitor Free Space in RDS
 if frees space < 20%
 increase free space to 40%
 
+```ruby
 
 require 'aws-sdk-rds'  # v2: require 'aws-sdk'
 
@@ -29,5 +53,8 @@ rds.db_instances.each do |i|
   puts
 end
 
+```
 
+````bash
 rails g scaffold RdsInstance name instance_id aws_access_key aws_secret min_free_space:integer desired_free_space:integer
+````
