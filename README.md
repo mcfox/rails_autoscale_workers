@@ -1,5 +1,6 @@
 # ASWorkers
-![ASW](app/assets/images/asw.png)
+<img src="./app/assets/images/asw.png" alt="ASW" width="150px"/>
+
 ## Requirements
 
 - PostgreSQL
@@ -14,10 +15,10 @@ foreman start
 # References
 Esse problema é resolvido no Heroku atraves de Add Ons de tereceiros
 
-https://www.hirefire.io
-https://elements.heroku.com/addons/rails-autoscale
-https://github.com/adamlogic/rails_autoscale_agent
-https://railsautoscale.com
+- https://www.hirefire.io
+- https://elements.heroku.com/addons/rails-autoscale
+- https://github.com/adamlogic/rails_autoscale_agent
+- https://railsautoscale.com
 
 Porem, no AWS não temos nada semelhante, porem o problema é exatamente o mesmo
 Para resolver esse problema, foi criado esse aplicativop, que usa como critério 
