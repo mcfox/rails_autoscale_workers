@@ -17,6 +17,7 @@ Esse problema é resolvido no Heroku atraves de Add Ons de tereceiros
 https://www.hirefire.io
 https://elements.heroku.com/addons/rails-autoscale
 https://github.com/adamlogic/rails_autoscale_agent
+https://railsautoscale.com
 
 Porem, no AWS não temos nada semelhante, porem o problema é exatamente o mesmo
 Para resolver esse problema, foi criado esse aplicativop, que usa como critério 
@@ -32,22 +33,28 @@ para o autoscaling o numero de jobs retornado pelo aplicativo
 - Pronto. Aogra acompanhe a variação para garantir que seus jobs estão sendo processados
 
 
-# TODO
+## TODO
+
 ## Novas Funcionanlidades
 
-### Autoscaling de RDS
+### Free Space Autoscaling on AWS RDS
+Dont get out of space on RDS and no not pay for unused space
+keep the free space on a safety minimum and increase a needed
 
+```bash
 Monitor Free Space in RDS
-if frees space < 20%
-increase free space to 40%
+   if free space < [ 15%]
+   increase free space to [ 20%] 
 
-```ruby
+```
+
+```bash
 
 require 'aws-sdk-rds'  # v2: require 'aws-sdk'
 
 rds = Aws::RDS::Resource.new(region: 'us-west-2')
       
-rds.db_instances.each do |i|
+rds.d_instances.each do |i|
   puts "Name (ID): #{i.id}"
   puts "Status   : #{i.db_instance_status}"
   puts
