@@ -12,7 +12,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.12'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '>= 4.6.0'
-gem 'sidekiq', '~> 5.2'
+gem 'sidekiq', '~> 6.4'
 gem 'haml', '~> 5.0'
 gem 'simple_form', '~> 4.0'
 gem 'simple-navigation', '~> 4.0'
